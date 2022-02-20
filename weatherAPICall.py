@@ -10,6 +10,11 @@ response_data =  requests.get(request_send)
 
 if response_data.status_code == 200:
     data = response_data.json() # this is the response i get from the weather site in the form of a json object
-    print(data)
+    name = data['name'] # in order to get specific information we access it through the data json object nad in the brackets we say the name of the variable we want
+    temperature = round(data["main"]["temp"] -273.15,2)# we get the temperature in that city, we substract 273.15 to make it in celcius
+    description = data['weather'][0]["description"]
+    print("The name of the city is " + name)
+    print("The temperature there right now is {}".format(float(temperature)) + " celsius")
+    print("The current weather state is " + description)
 else:
     print ("An error occured")
